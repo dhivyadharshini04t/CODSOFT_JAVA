@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Main {
+    private static Scanner scanner = new Scanner(System.in);
+    private static Map<String, String[]> questions = new HashMap<>();
+    private static int score = 0;
+
+    public static void main(String[] args) {
+        initializeQuestions();
+        startQuiz();
+        displayResult();
+    }
+
+    private static void initializeQuestions() {
+        questions.put("What is the capital of France?",
+                new String[]{"A. London", "B. Paris", "C. Rome", "D. Berlin"});
+        questions.put("Which planet is known as the Red Planet?",
+                new String[]{"A. Venus", "B. Mars", "C. Jupiter", "D. Saturn"});
+    }
+
+    private static void startQuiz() {
+        System.out.println("Welcome to the Quiz Game!");
+        for (String question : questions.keySet()) {
+            System.out.println(question);
+            String[] options = questions.get(question);
+            String correctAnswer = "";
+            for (String option : options) {
+                System.out.println(option);
+                if (option.startsWith("B")) { 
+                    correctAnswer = option.split("\\.")[0];
+                }
+            }
+            String answer = scanner.nextLine().toUpperCase();
+            if (answer.equals(correctAnswer)) {
+                System.out.println("Correct!\n");
+                score++;
+            } else {
+                System.out.println("Incorrect!\n");
+            }
+        }
+    }
+
+    private static void displayResult() {
+        System.out.println("Quiz completed!");
+        System.out.println("Your final score is: " + score + "/" + questions.size());
+    }
+}
